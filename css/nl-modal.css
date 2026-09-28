@@ -37,10 +37,12 @@
 .nl-modal.is-open .nl-modal__panel > :nth-child(6) { animation-delay: .17s; }
 .nl-modal.is-open .nl-modal__panel > :nth-child(n+7) { animation-delay: .2s; }
 
-.nl-modal__top {
-  display: flex; align-items: center; justify-content: space-between;
-  margin: -4px -8px 20px 0;
-}
+/* Cabeçalho: ícone + contexto + título (mesmo padrão do aviso de canto) */
+.nl-modal__head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.nl-modal__heading { flex: 1; min-width: 0; }
+.nl-modal__eyebrow { margin: 0 0 1px; font-size: 13px; font-weight: 500; color: var(--nl-text-3); }
+.nl-modal__label { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: -.02em; color: var(--nl-text); }
+.nl-modal__close { align-self: flex-start; margin: -6px -10px 0 0; }
 
 .nl-modal__title {
   margin: 0 0 8px; font-size: 24px; line-height: 1.2; font-weight: 700;
@@ -70,12 +72,6 @@
 }
 
 .nl-modal__actions { display: flex; flex-direction: column; gap: 6px; margin-top: 20px; }
-
-.nl-modal__methods {
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  margin: 12px 0 0; font-size: 12px; color: var(--nl-text-3);
-}
-.nl-modal__methods svg.nl-i { width: 14px; height: 14px; }
 
 
 @media (max-width: 480px) {

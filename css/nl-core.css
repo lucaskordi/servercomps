@@ -42,12 +42,13 @@
 [class^="nl-"] *, [class*=" nl-"] * { box-sizing: border-box; }
 [class^="nl-"][hidden], [class*=" nl-"][hidden], [class*="nl-"] [hidden] { display: none !important; }
 
-/* Ícones (stroke, estilo linear) */
+/* Ícones: objetos preenchidos (.nl-i--fill); setas, X, chevron e check em traço */
 svg.nl-i {
   width: 20px; height: 20px; flex: none;
-  fill: none; stroke: currentColor; stroke-width: 1.8;
+  fill: none; stroke: currentColor; stroke-width: 2;
   stroke-linecap: round; stroke-linejoin: round;
 }
+svg.nl-i--fill { fill: currentColor; fill-rule: evenodd; stroke: none; opacity: .7; }
 
 /* --------------------------------------------------------------------------
    Botões
@@ -188,7 +189,7 @@ svg.nl-i {
 
 /* Espaço estreito: nome + preço na 1ª linha, descrição ocupa a 2ª linha inteira */
 .nl-plans { container: nl-plans / inline-size; }
-@container nl-plans (max-width: 330px) {
+@container nl-plans (max-width: 360px) {
   .nl-plan { display: grid; grid-template-columns: 20px 1fr auto; column-gap: 12px; row-gap: 3px; align-items: center; }
   .nl-plan__radio { grid-row: 1 / span 2; }
   .nl-plan__info, .nl-plan__price { display: contents; }

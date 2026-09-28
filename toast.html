@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,10 +12,12 @@
   <link rel="stylesheet" href="css/nl-toast.css">
   <link rel="stylesheet" href="css/demo.css">
 </head>
+
 <body>
 
   <header class="demo-bar">
-    <a class="demo-bar__title" href="index.html"><img src="public/logoblack.svg" alt="Nest Lab"><span>Componentes de renovação</span></a>
+    <a class="demo-bar__title" href="index.html"><img src="public/logoblack.svg" alt="Nest Lab"><span>Componentes de
+        renovação</span></a>
     <nav>
       <a href="popup.html"><span>01</span>Popup</a>
       <a href="toast.html" aria-current="page"><span>02</span>Aviso</a>
@@ -36,23 +39,32 @@
        ===================================================================== -->
   <aside class="nl-toast" id="nlRenewToast" data-auto-show role="region" aria-label="Aviso de renovação do servidor">
     <button class="nl-icon-btn nl-toast__close" type="button" data-nl-dismiss aria-label="Fechar aviso">
-      <svg class="nl-i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      <svg class="nl-i" viewBox="0 0 24 24">
+        <path d="M18 6 6 18M6 6l12 12" />
+      </svg>
     </button>
 
     <div class="nl-toast__head">
       <div class="nl-icon-box nl-icon-box--sm" aria-hidden="true">
-        <svg class="nl-i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/></svg>
+        <svg class="nl-i nl-i--fill" viewBox="0 0 24 24">
+          <path
+            d="M5 3.5h14a2.5 2.5 0 0 1 2.5 2.5v3A2.5 2.5 0 0 1 19 11.5H5A2.5 2.5 0 0 1 2.5 9V6A2.5 2.5 0 0 1 5 3.5ZM7 6.3a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4ZM5 12.5h14a2.5 2.5 0 0 1 2.5 2.5v3a2.5 2.5 0 0 1-2.5 2.5H5A2.5 2.5 0 0 1 2.5 18v-3A2.5 2.5 0 0 1 5 12.5ZM7 15.3a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z" />
+        </svg>
       </div>
       <div>
-        <p class="nl-toast__eyebrow">Seu servidor</p>
+        <p class="nl-toast__eyebrow">Sistema Exavet</p>
         <h3 class="nl-toast__title">Hora de renovar</h3>
       </div>
     </div>
 
-    <p class="nl-toast__text">Seu servidor vence em <strong>30 dias</strong>. Renove para manter seus sites e sistemas no ar, sem interrupção.</p>
+    <p class="nl-toast__text">Seu servidor vence em <strong>30 dias</strong>. Renove para manter seus sites e sistemas
+      no ar, sem interrupção.</p>
 
     <div class="nl-info-row nl-toast__due">
-      <svg class="nl-i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+      <svg class="nl-i nl-i--fill" viewBox="0 0 24 24">
+        <path
+          d="M8 2.5a1 1 0 0 1 1 1V4.5h6V3.5a1 1 0 1 1 2 0V4.5h1a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-11a3 3 0 0 1 3-3h1V3.5a1 1 0 0 1 1-1ZM3 9.5v1.5h18V9.5H3Z" />
+      </svg>
       <span>Vence em <strong data-nl-due="30">30 dias</strong></span>
       <span class="nl-tag nl-info-row__end">Anual -20%</span>
     </div>
@@ -60,7 +72,9 @@
     <div class="nl-toast__actions">
       <a class="nl-btn nl-btn--primary nl-btn--sm" href="checkout.html?plano=anual">
         <span class="nl-btn__label">Renovar agora</span>
-        <svg class="nl-i nl-i--arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <svg class="nl-i nl-i--arrow" viewBox="0 0 24 24">
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
       </a>
       <a class="nl-btn nl-btn--text nl-btn--sm" href="checkout.html?plano=mensal">Ver planos</a>
     </div>
@@ -68,7 +82,8 @@
     <footer class="nl-brand nl-brand--footer">
       <img class="nl-brand__nest" src="public/logoblack.svg" alt="Nest Lab">
       <span class="nl-brand__sep" aria-hidden="true"></span>
-      <span class="nl-brand__powered">powered by <img class="nl-brand__host" src="public/hostingerblack.svg" alt="Hostinger"></span>
+      <span class="nl-brand__powered">powered by <img class="nl-brand__host" src="public/hostingerblack.svg"
+          alt="Hostinger"></span>
     </footer>
   </aside>
   <!-- ===================== fim do COMPONENTE 02 ===================== -->
@@ -76,4 +91,5 @@
   <script src="js/nl-core.js"></script>
   <script src="js/nl-toast.js"></script>
 </body>
+
 </html>

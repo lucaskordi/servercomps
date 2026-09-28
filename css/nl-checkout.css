@@ -37,11 +37,8 @@
 .nl-co__due-col strong { font-size: 16px; font-weight: 600; letter-spacing: -.01em; color: var(--nl-text-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .nl-co__due-col.is-new { text-align: right; }
 .nl-co__due-col.is-new strong { color: var(--nl-primary); }
-.nl-co__due-arrow {
-  width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%;
-  background: #fff; color: var(--nl-primary); box-shadow: var(--nl-shadow-sm);
-}
-.nl-co__due-arrow svg.nl-i { width: 16px; height: 16px; }
+.nl-co__due-arrow { display: grid; place-items: center; color: var(--nl-text-3); }
+.nl-co__due-arrow svg.nl-i { width: 18px; height: 18px; }
 
 .nl-co__grid { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 24px; align-items: start; }
 .nl-co__form { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
@@ -155,10 +152,7 @@ select.nl-input {
   display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center;
   padding: 0 12px; text-wrap: balance; font-size: 12px; font-weight: 500; line-height: 1.3; color: var(--nl-text-2);
 }
-.nl-trust svg.nl-i {
-  width: 32px; height: 32px; padding: 8px; border-radius: 10px;
-  background: #fff; color: var(--nl-primary); box-shadow: var(--nl-shadow-sm);
-}
+.nl-trust svg.nl-i { width: 20px; height: 20px; color: var(--nl-primary); }
 
 
 /* Sucesso */

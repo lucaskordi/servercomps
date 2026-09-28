@@ -37,22 +37,32 @@
        COMPONENTE 04 — copie daqui até o fim do bloco
        data-nl-due="-3": data de vencimento = hoje − 3 dias
        ===================================================================== -->
-  <div class="nl-modal" id="nlOverdueModal" data-auto-open
-       role="alertdialog" aria-modal="true" aria-labelledby="nlOverdueTitle" aria-describedby="nlOverdueDesc">
+  <div class="nl-modal" id="nlOverdueModal" data-auto-open role="alertdialog" aria-modal="true"
+    aria-labelledby="nlOverdueTitle" aria-describedby="nlOverdueDesc">
     <div class="nl-modal__backdrop" data-nl-close></div>
 
     <div class="nl-modal__panel">
-      <div class="nl-modal__top">
+      <div class="nl-modal__head">
         <div class="nl-icon-box nl-icon-box--alert" aria-hidden="true">
-          <svg class="nl-i" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2.4 17.5A2 2 0 0 0 4.1 20.5h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+          <svg class="nl-i nl-i--fill" viewBox="0 0 24 24">
+            <path
+              d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm-1 5.5a1 1 0 0 1 2 0v5a1 1 0 0 1-2 0v-5Zm1 8a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z" />
+          </svg>
         </div>
-        <button class="nl-icon-btn" type="button" data-nl-close aria-label="Fechar">
-          <svg class="nl-i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        <div class="nl-modal__heading">
+          <p class="nl-modal__eyebrow">Sistema Exavet</p>
+          <p class="nl-modal__label">Pagamento em atraso</p>
+        </div>
+        <button class="nl-icon-btn nl-modal__close" type="button" data-nl-close aria-label="Fechar">
+          <svg class="nl-i" viewBox="0 0 24 24">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
         </button>
       </div>
 
       <h2 class="nl-modal__title" id="nlOverdueTitle">Seu servidor pode ficar offline a qualquer momento</h2>
-      <p class="nl-modal__desc" id="nlOverdueDesc">O prazo de renovação do seu servidor já passou e o pagamento ainda está em aberto. Conclua agora para que seus sites e sistemas continuem no ar.</p>
+      <p class="nl-modal__desc" id="nlOverdueDesc">O prazo de renovação do seu servidor já passou e o pagamento ainda
+        está em aberto. Conclua agora para que seus sites e sistemas continuem no ar.</p>
 
       <dl class="nl-modal__facts nl-modal__block">
         <div>
@@ -68,7 +78,9 @@
       <div class="nl-modal__actions">
         <a class="nl-btn nl-btn--primary nl-btn--lg nl-btn--block" href="checkout.html" data-nl-cta>
           <span class="nl-btn__label">Regularizar pagamento</span>
-          <svg class="nl-i nl-i--arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <svg class="nl-i nl-i--arrow" viewBox="0 0 24 24">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
         </a>
         <a class="nl-btn nl-btn--text nl-btn--block" href="#suporte">Falar com o suporte</a>
       </div>
@@ -78,7 +90,8 @@
       <footer class="nl-brand nl-brand--footer">
         <img class="nl-brand__nest" src="public/logoblack.svg" alt="Nest Lab">
         <span class="nl-brand__sep" aria-hidden="true"></span>
-        <span class="nl-brand__powered">powered by <img class="nl-brand__host" src="public/hostingerblack.svg" alt="Hostinger"></span>
+        <span class="nl-brand__powered">powered by <img class="nl-brand__host" src="public/hostingerblack.svg"
+            alt="Hostinger"></span>
       </footer>
     </div>
   </div>
