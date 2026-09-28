@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>04 · Pagamento em atraso — Nest Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/nl-core.css">
+  <link rel="stylesheet" href="css/nl-modal.css">
+  <link rel="stylesheet" href="css/demo.css">
+</head>
+
+<body>
+
+  <header class="demo-bar">
+    <a class="demo-bar__title" href="index.html"><img src="public/logoblack.svg" alt="Nest Lab"><span>Componentes de
+        renovação</span></a>
+    <nav>
+      <a href="popup.html"><span>01</span>Popup</a>
+      <a href="toast.html"><span>02</span>Aviso</a>
+      <a href="checkout.html"><span>03</span>Checkout</a>
+      <a href="popup-atraso.html" aria-current="page"><span>04</span>Atraso</a>
+    </nav>
+  </header>
+
+  <main class="demo-stage">
+    <span class="demo-stage__eyebrow">Componente 04</span>
+    <h1>Pagamento em atraso</h1>
+    <p>Aviso para quando a renovação venceu e o servidor pode ser desligado a qualquer momento.</p>
+    <button class="nl-btn nl-btn--outline" type="button" data-nl-open-modal="nlOverdueModal">Abrir popup</button>
+  </main>
+
+  <!-- =====================================================================
+       COMPONENTE 04 — copie daqui até o fim do bloco
+       data-nl-due="-3": data de vencimento = hoje − 3 dias
+       ===================================================================== -->
+  <div class="nl-modal" id="nlOverdueModal" data-auto-open
+       role="alertdialog" aria-modal="true" aria-labelledby="nlOverdueTitle" aria-describedby="nlOverdueDesc">
+    <div class="nl-modal__backdrop" data-nl-close></div>
+
+    <div class="nl-modal__panel">
+      <div class="nl-modal__top">
+        <div class="nl-icon-box nl-icon-box--alert" aria-hidden="true">
+          <svg class="nl-i" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2.4 17.5A2 2 0 0 0 4.1 20.5h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+        </div>
+        <button class="nl-icon-btn" type="button" data-nl-close aria-label="Fechar">
+          <svg class="nl-i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <h2 class="nl-modal__title" id="nlOverdueTitle">Seu servidor pode ficar offline a qualquer momento</h2>
+      <p class="nl-modal__desc" id="nlOverdueDesc">O prazo de renovação do seu servidor já passou e o pagamento ainda está em aberto. Conclua agora para que seus sites e sistemas continuem no ar.</p>
+
+      <dl class="nl-modal__facts nl-modal__block">
+        <div>
+          <dt>Vencimento</dt>
+          <dd><span data-nl-due="-3">—</span><small>há 3 dias</small></dd>
+        </div>
+        <div>
+          <dt>Situação</dt>
+          <dd><span class="nl-status"><span class="nl-chip__dot"></span>Pagamento pendente</span></dd>
+        </div>
+      </dl>
+
+      <div class="nl-modal__actions">
+        <a class="nl-btn nl-btn--primary nl-btn--lg nl-btn--block" href="checkout.html" data-nl-cta>
+          <span class="nl-btn__label">Regularizar pagamento</span>
+          <svg class="nl-i nl-i--arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="nl-btn nl-btn--text nl-btn--block" href="#suporte">Falar com o suporte</a>
+      </div>
+
+      <p class="nl-modal__note">Já pagou? Pode desconsiderar este aviso. A confirmação leva alguns minutos.</p>
+
+      <footer class="nl-brand nl-brand--footer">
+        <img class="nl-brand__nest" src="public/logoblack.svg" alt="Nest Lab">
+        <span class="nl-brand__sep" aria-hidden="true"></span>
+        <span class="nl-brand__powered">powered by <img class="nl-brand__host" src="public/hostingerblack.svg" alt="Hostinger"></span>
+      </footer>
+    </div>
+  </div>
+  <!-- ===================== fim do COMPONENTE 04 ===================== -->
+
+  <script src="js/nl-core.js"></script>
+  <script src="js/nl-modal.js"></script>
+</body>
+
+</html>

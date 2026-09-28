@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Componentes de renovação — Nest Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/nl-core.css">
+  <link rel="stylesheet" href="css/demo.css">
+  <style>
+    .hub { max-width: 1000px; margin: 0 auto; padding: 72px 24px 64px; }
+    .hub__head { max-width: 560px; margin-bottom: 40px; }
+    .hub__head h1 { margin: 14px 0 10px; font-size: 38px; line-height: 1.1; letter-spacing: -.04em; }
+    .hub__head p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--nl-text-2); }
+    .hub__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .hub-card {
+      display: flex; flex-direction: column; padding: 10px 10px 20px; border-radius: 24px;
+      background: #fff; box-shadow: inset 0 0 0 1px var(--nl-border);
+      text-decoration: none; color: inherit;
+      transition: box-shadow .3s, transform .35s var(--nl-ease);
+    }
+    .hub-card:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 1px var(--nl-border), 0 24px 48px -24px rgba(23,21,31,.25); }
+    .hub-card:focus-visible { outline: none; box-shadow: inset 0 0 0 1.5px var(--nl-primary), var(--nl-ring); }
+    .hub-card__preview {
+      position: relative; height: 180px; border-radius: 16px; overflow: hidden;
+      background: var(--nl-surface); transition: background-color .3s;
+    }
+    .hub-card:hover .hub-card__preview { background: var(--nl-primary-50); }
+    .hub-card__body { padding: 18px 10px 0; }
+    .hub-card__num { font-size: 12px; font-weight: 600; color: var(--nl-primary); letter-spacing: .04em; }
+    .hub-card h2 { display: flex; align-items: center; justify-content: space-between; margin: 6px 0 6px; font-size: 18px; letter-spacing: -.02em; }
+    .hub-card h2 svg.nl-i { width: 18px; height: 18px; color: var(--nl-text-3); transition: transform .3s var(--nl-ease), color .2s; }
+    .hub-card:hover h2 svg.nl-i { transform: translateX(4px); color: var(--nl-primary); }
+    .hub-card p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--nl-text-2); }
+
+    /* mini ilustrações */
+    .mini { position: absolute; background: #fff; border-radius: 10px; box-shadow: 0 10px 24px -12px rgba(23,21,31,.3); transition: transform .4s var(--nl-ease); }
+    .mini i { display: block; height: 6px; border-radius: 3px; background: var(--nl-surface-2); margin-bottom: 6px; }
+    .mini i.p { background: var(--nl-primary); }
+    .mini i.l { background: var(--nl-primary-100); }
+    .mini--modal { left: 50%; top: 50%; width: 120px; padding: 14px 12px 10px; transform: translate(-50%, -50%); }
+    .hub-card:hover .mini--modal { transform: translate(-50%, -54%) scale(1.04); }
+    .mini--toast { right: 12px; bottom: 12px; width: 110px; padding: 12px 10px 8px; }
+    .hub-card:hover .mini--toast { transform: translateY(-6px); }
+    .mini--co { left: 16px; right: 16px; top: 22px; bottom: 22px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 10px; padding: 12px; }
+    .mini--co > div:last-child { background: var(--nl-surface); border-radius: 6px; padding: 8px; }
+    .hub-card:hover .mini--co { transform: scale(1.03); }
+    .mini__dim { position: absolute; inset: 0; background: rgba(20,17,33,.08); }
+
+    .hub__foot { margin-top: 48px; }
+    @media (max-width: 860px) { .hub__grid { grid-template-columns: 1fr; } .hub { padding-top: 48px; } .hub__head h1 { font-size: 30px; } }
+  </style>
+</head>
+<body>
+
+  <header class="demo-bar">
+    <a class="demo-bar__title" href="index.html"><img src="public/logoblack.svg" alt="Nest Lab"><span>Componentes de renovação</span></a>
+    <nav>
+      <a href="popup.html"><span>01</span>Popup</a>
+      <a href="toast.html"><span>02</span>Aviso</a>
+      <a href="checkout.html"><span>03</span>Checkout</a>
+      <a href="popup-atraso.html"><span>04</span>Atraso</a>
+    </nav>
+  </header>
+
+  <main class="hub">
+    <div class="hub__head">
+      <span class="nl-chip nl-chip--primary"><span class="nl-chip__dot"></span>Renovação de servidor</span>
+      <h1>Componentes de aviso e renovação</h1>
+      <p>Quatro peças para lembrar o cliente do vencimento e levar direto à renovação, mensal recorrente ou anual com desconto.</p>
+    </div>
+
+    <div class="hub__grid">
+      <a class="hub-card" href="popup.html">
+        <div class="hub-card__preview">
+          <div class="mini__dim"></div>
+          <div class="mini mini--modal"><i class="l" style="width:22px;height:22px;border-radius:7px"></i><i style="width:90%"></i><i style="width:60%"></i><i class="l" style="height:14px;border-radius:4px"></i><i style="height:14px;border-radius:4px"></i><i class="p" style="height:12px;border-radius:4px;margin:0"></i></div>
+        </div>
+        <div class="hub-card__body">
+          <span class="hub-card__num">01</span>
+          <h2>Popup de vencimento <svg class="nl-i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></h2>
+          <p>Modal central para os últimos 3 dias, com escolha de plano e CTA direto.</p>
+        </div>
+      </a>
+
+      <a class="hub-card" href="toast.html">
+        <div class="hub-card__preview">
+          <div class="mini mini--toast"><i class="l" style="width:16px;height:16px;border-radius:5px"></i><i style="width:80%"></i><i style="width:55%"></i><i class="p" style="height:10px;border-radius:4px;margin:0;width:70%"></i></div>
+        </div>
+        <div class="hub-card__body">
+          <span class="hub-card__num">02</span>
+          <h2>Aviso de canto <svg class="nl-i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></h2>
+          <p>Lembrete discreto com 30 dias de antecedência, fechável no X.</p>
+        </div>
+      </a>
+
+      <a class="hub-card" href="checkout.html">
+        <div class="hub-card__preview">
+          <div class="mini mini--co">
+            <div><i class="l" style="height:14px;border-radius:4px"></i><i style="height:14px;border-radius:4px"></i><i style="width:70%"></i><i style="width:90%"></i><i style="width:50%"></i></div>
+            <div><i style="width:60%;background:#fff"></i><i style="background:#fff"></i><i style="width:80%;background:#fff"></i><i class="p" style="height:10px;border-radius:4px;margin:0"></i></div>
+          </div>
+        </div>
+        <div class="hub-card__body">
+          <span class="hub-card__num">03</span>
+          <h2>Checkout transparente <svg class="nl-i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></h2>
+          <p>Plano, dados e pagamento por cartão ou Pix numa só página.</p>
+        </div>
+      </a>
+
+      <a class="hub-card" href="popup-atraso.html">
+        <div class="hub-card__preview">
+          <div class="mini__dim"></div>
+          <div class="mini mini--modal"><i style="width:22px;height:22px;border-radius:7px;background:#ffe3e3"></i><i style="width:90%"></i><i style="width:60%"></i><i style="height:28px;border-radius:5px"></i><i class="p" style="height:12px;border-radius:4px;margin:0"></i></div>
+        </div>
+        <div class="hub-card__body">
+          <span class="hub-card__num">04</span>
+          <h2>Pagamento em atraso <svg class="nl-i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></h2>
+          <p>Popup urgente e educado quando o servidor pode sair do ar a qualquer momento.</p>
+        </div>
+      </a>
+    </div>
+
+    <footer class="hub__foot nl-brand nl-brand--start">
+      <img class="nl-brand__nest" src="public/logoblack.svg" alt="Nest Lab">
+      <span class="nl-brand__sep" aria-hidden="true"></span>
+      <span class="nl-brand__powered">powered by <img class="nl-brand__host" src="public/hostingerblack.svg" alt="Hostinger"></span>
+    </footer>
+  </main>
+</body>
+</html>

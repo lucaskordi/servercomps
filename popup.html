@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>01 · Popup de vencimento — Nest Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/nl-core.css">
+  <link rel="stylesheet" href="css/nl-modal.css">
+  <link rel="stylesheet" href="css/demo.css">
+</head>
+
+<body>
+
+  <header class="demo-bar">
+    <a class="demo-bar__title" href="index.html"><img src="public/logoblack.svg" alt="Nest Lab"><span>Componentes de
+        renovação</span></a>
+    <nav>
+      <a href="popup.html" aria-current="page"><span>01</span>Popup</a>
+      <a href="toast.html"><span>02</span>Aviso</a>
+      <a href="checkout.html"><span>03</span>Checkout</a>
+      <a href="popup-atraso.html"><span>04</span>Atraso</a>
+    </nav>
+  </header>
+
+  <main class="demo-stage">
+    <span class="demo-stage__eyebrow">Componente 01</span>
+    <h1>Popup de vencimento</h1>
+    <p>Aviso central para quando faltam poucos dias. Abre sozinho ao carregar a página.</p>
+    <button class="nl-btn nl-btn--outline" type="button" data-nl-open-modal>Abrir popup</button>
+  </main>
+
+  <!-- =====================================================================
+       COMPONENTE 01 — copie daqui até o fim do bloco
+       ===================================================================== -->
+  <div class="nl-modal" id="nlRenewModal" data-auto-open data-checkout-url="checkout.html" role="dialog"
+    aria-modal="true" aria-labelledby="nlModalTitle" aria-describedby="nlModalDesc">
+    <div class="nl-modal__backdrop" data-nl-close></div>
+
+    <div class="nl-modal__panel">
+      <div class="nl-modal__top">
+        <div class="nl-icon-box" aria-hidden="true">
+          <svg class="nl-i" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="7" rx="2" />
+            <rect x="3" y="13" width="18" height="7" rx="2" />
+            <path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6" />
+          </svg>
+        </div>
+        <button class="nl-icon-btn" type="button" data-nl-close aria-label="Fechar">
+          <svg class="nl-i" viewBox="0 0 24 24">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <h2 class="nl-modal__title" id="nlModalTitle">Seu servidor ficará indisponível em <em>3&nbsp;dias</em></h2>
+      <p class="nl-modal__desc" id="nlModalDesc">Renove agora e mantenha seus sites e sistemas no ar, sem nenhuma pausa.
+        Leva menos de um minuto.</p>
+
+      <div class="nl-info-row nl-modal__block">
+        <svg class="nl-i" viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="16" rx="3" />
+          <path d="M8 3v4M16 3v4M3 10h18" />
+        </svg>
+        <span>Vence em <strong data-nl-due="3">3 dias</strong></span>
+        <span class="nl-status nl-info-row__end"><span class="nl-chip__dot"></span>Urgente</span>
+      </div>
+
+      <fieldset class="nl-plans">
+        <legend>Escolha seu plano</legend>
+
+        <label class="nl-plan">
+          <input type="radio" name="nl-modal-plan" value="anual" checked>
+          <span class="nl-plan__radio" aria-hidden="true"></span>
+          <span class="nl-plan__info">
+            <span class="nl-plan__name">Anual <span class="nl-tag">-20%</span></span>
+            <span class="nl-plan__desc">Economize R$ 240/ano</span>
+          </span>
+          <span class="nl-plan__price">
+            <span class="nl-plan__old">R$ 99,90</span>
+            <span class="nl-plan__amount">R$ 79,90<small>/mês</small></span>
+          </span>
+        </label>
+
+        <label class="nl-plan">
+          <input type="radio" name="nl-modal-plan" value="mensal">
+          <span class="nl-plan__radio" aria-hidden="true"></span>
+          <span class="nl-plan__info">
+            <span class="nl-plan__name">Mensal</span>
+            <span class="nl-plan__desc">Cancele quando quiser</span>
+          </span>
+          <span class="nl-plan__price">
+            <span class="nl-plan__amount">R$ 99,90<small>/mês</small></span>
+          </span>
+        </label>
+      </fieldset>
+
+      <div class="nl-modal__actions">
+        <a class="nl-btn nl-btn--primary nl-btn--lg nl-btn--block" href="checkout.html?plano=anual" data-nl-cta>
+          <span class="nl-btn__label">Renovar com 20% off</span>
+          <svg class="nl-i nl-i--arrow" viewBox="0 0 24 24">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+        <button class="nl-btn nl-btn--text nl-btn--block" type="button" data-nl-close>Lembrar mais tarde</button>
+      </div>
+
+      <p class="nl-modal__methods">
+        <svg class="nl-i" viewBox="0 0 24 24">
+          <rect x="4" y="11" width="16" height="10" rx="2" />
+          <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+        </svg>
+        Cartão ou Pix · pagamento seguro
+      </p>
+
+      <footer class="nl-brand nl-brand--footer">
+        <img class="nl-brand__nest" src="public/logoblack.svg" alt="Nest Lab">
+        <span class="nl-brand__sep" aria-hidden="true"></span>
+        <span class="nl-brand__powered">powered by <img class="nl-brand__host" src="public/hostingerblack.svg"
+            alt="Hostinger"></span>
+      </footer>
+    </div>
+  </div>
+  <!-- ===================== fim do COMPONENTE 01 ===================== -->
+
+  <script src="js/nl-core.js"></script>
+  <script src="js/nl-modal.js"></script>
+</body>
+
+</html>

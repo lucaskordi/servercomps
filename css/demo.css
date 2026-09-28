@@ -1,0 +1,43 @@
+/* Estilos só das páginas de demonstração (não levar para o projeto final) */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  min-height: 100vh; background: #fff; color: var(--nl-text);
+  font-family: var(--nl-font); -webkit-font-smoothing: antialiased;
+}
+
+.demo-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  height: 60px; padding: 0 24px; border-bottom: 1px solid var(--nl-border); font-size: 13px;
+}
+.demo-bar__title { display: flex; align-items: center; gap: 10px; color: var(--nl-text-3); font-weight: 500; text-decoration: none; }
+.demo-bar__title img { height: 12px; opacity: .5; transition: opacity .2s; }
+.demo-bar__title:hover img { opacity: .8; }
+.demo-bar nav { display: flex; gap: 2px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.demo-bar nav::-webkit-scrollbar { display: none; }
+.demo-bar nav a { flex: none; }
+.demo-bar nav a {
+  padding: 8px 12px; border-radius: 9px; color: var(--nl-text-2);
+  text-decoration: none; font-weight: 500; transition: background-color .2s, color .2s;
+}
+.demo-bar nav a:hover { background: var(--nl-surface); color: var(--nl-text); }
+.demo-bar nav a[aria-current="page"] { background: var(--nl-primary-50); color: var(--nl-primary); }
+.demo-bar nav a span { color: var(--nl-text-3); margin-right: 4px; font-variant-numeric: tabular-nums; }
+.demo-bar nav a[aria-current="page"] span { color: inherit; opacity: .6; }
+
+.demo-stage {
+  min-height: calc(100vh - 60px); display: grid; place-content: center; justify-items: center;
+  gap: 10px; padding: 48px 16px; text-align: center;
+}
+.demo-stage__eyebrow { font-size: 13px; font-weight: 600; color: var(--nl-primary); letter-spacing: .02em; }
+.demo-stage h1 { margin: 0; font-size: 30px; letter-spacing: -.03em; }
+.demo-stage p { margin: 0 0 14px; max-width: 420px; color: var(--nl-text-2); line-height: 1.55; }
+
+@media (max-width: 560px) {
+  .demo-bar { padding: 0 16px; }
+  .demo-bar__title span { display: none; }
+  .demo-bar { gap: 10px; }
+  .demo-bar__title { flex: none; }
+  .demo-bar nav a { padding: 8px 8px; }
+  .demo-bar nav a span { display: none; }
+}

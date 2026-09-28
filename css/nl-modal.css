@@ -1,0 +1,111 @@
+/* ==========================================================================
+   01 — Popup de vencimento (modal central)
+   ========================================================================== */
+.nl-modal {
+  position: fixed; inset: 0; z-index: 1000;
+  display: grid; place-items: center; padding: 16px;
+  visibility: hidden; pointer-events: none;
+  transition: visibility 0s linear .4s;
+}
+.nl-modal.is-open { visibility: visible; pointer-events: auto; transition-delay: 0s; }
+
+.nl-modal__backdrop {
+  position: absolute; inset: 0;
+  background: rgba(20, 17, 33, .36);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  opacity: 0; transition: opacity .35s ease;
+}
+.nl-modal.is-open .nl-modal__backdrop { opacity: 1; }
+
+.nl-modal__panel {
+  position: relative; width: min(440px, 100%);
+  max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain;
+  padding: 28px; border-radius: 26px;
+  background: #fff;
+  box-shadow: var(--nl-shadow-lg);
+  opacity: 0; transform: translateY(18px) scale(.97);
+  transition: opacity .3s ease, transform .45s var(--nl-ease);
+}
+.nl-modal.is-open .nl-modal__panel { opacity: 1; transform: none; }
+
+/* entrada escalonada do conteúdo */
+.nl-modal.is-open .nl-modal__panel > * { animation: nl-rise .5s var(--nl-ease) both; }
+.nl-modal.is-open .nl-modal__panel > :nth-child(2) { animation-delay: .05s; }
+.nl-modal.is-open .nl-modal__panel > :nth-child(3) { animation-delay: .08s; }
+.nl-modal.is-open .nl-modal__panel > :nth-child(4) { animation-delay: .11s; }
+.nl-modal.is-open .nl-modal__panel > :nth-child(5) { animation-delay: .14s; }
+.nl-modal.is-open .nl-modal__panel > :nth-child(6) { animation-delay: .17s; }
+.nl-modal.is-open .nl-modal__panel > :nth-child(n+7) { animation-delay: .2s; }
+
+.nl-modal__top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin: -4px -8px 20px 0;
+}
+
+.nl-modal__icon {
+  width: 48px; height: 48px; flex: none;
+  display: grid; place-items: center; border-radius: 14px;
+  background: var(--nl-primary-50); color: var(--nl-primary);
+}
+.nl-modal__icon svg.nl-i { width: 24px; height: 24px; }
+
+.nl-modal__title {
+  margin: 0 0 8px; font-size: 24px; line-height: 1.2; font-weight: 700;
+  letter-spacing: -.03em; color: var(--nl-text);
+  text-wrap: balance;
+}
+.nl-modal__title em { font-style: normal; color: var(--nl-primary); }
+.nl-modal__desc { margin: 0; font-size: 15px; line-height: 1.55; color: var(--nl-text-2); text-wrap: pretty; }
+
+.nl-modal__due {
+  display: flex; align-items: center; gap: 10px;
+  margin: 20px 0 16px; padding: 12px 14px; border-radius: 12px;
+  background: var(--nl-surface); font-size: 14px; color: var(--nl-text-2);
+}
+.nl-modal__due svg.nl-i { width: 18px; height: 18px; color: var(--nl-text-3); }
+.nl-modal__due strong { color: var(--nl-text); font-weight: 600; white-space: nowrap; }
+.nl-modal__due-status {
+  display: inline-flex; align-items: center; gap: 7px; margin-left: auto;
+  font-size: 12px; font-weight: 600; color: var(--nl-danger); white-space: nowrap;
+}
+.nl-modal__due-status .nl-chip__dot { background: var(--nl-danger); }
+
+/* ---- 04 · Variante: pagamento em atraso ---- */
+.nl-modal__icon--alert { background: #fff1f1; color: var(--nl-danger); }
+
+.nl-modal__facts {
+  margin: 20px 0 0; padding: 4px 16px; border-radius: 14px; background: var(--nl-surface);
+}
+.nl-modal__facts > div {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 11px 0; font-size: 14px;
+}
+.nl-modal__facts > div + div { border-top: 1px solid var(--nl-border); }
+.nl-modal__facts dt { color: var(--nl-text-2); }
+.nl-modal__facts dd { margin: 0; font-weight: 600; color: var(--nl-text); text-align: right; }
+.nl-modal__facts dd small { font-weight: 500; color: var(--nl-text-3); margin-left: 4px; }
+.nl-modal__facts .is-alert { display: inline-flex; align-items: center; gap: 8px; color: #c42b30; }
+.nl-modal__facts .is-alert .nl-chip__dot { background: var(--nl-danger); }
+
+.nl-modal__note {
+  margin: 14px 0 0; font-size: 13px; line-height: 1.5; color: var(--nl-text-3); text-align: center; text-wrap: balance;
+}
+
+.nl-modal__actions { display: flex; flex-direction: column; gap: 6px; margin-top: 20px; }
+
+.nl-modal__methods {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin: 12px 0 0; font-size: 12px; color: var(--nl-text-3);
+}
+.nl-modal__methods svg.nl-i { width: 14px; height: 14px; }
+
+.nl-modal__panel > .nl-brand { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--nl-border); }
+
+@media (max-width: 480px) {
+  .nl-modal { place-items: end center; padding: 0; }
+  .nl-modal__panel {
+    width: 100%; max-height: 92dvh; padding: 24px 20px calc(20px + env(safe-area-inset-bottom));
+    border-radius: 24px 24px 0 0; transform: translateY(40px);
+  }
+  .nl-modal__title { font-size: 22px; }
+}

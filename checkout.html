@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>03 · Checkout de renovação — Nest Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/nl-core.css">
+  <link rel="stylesheet" href="css/nl-checkout.css">
+  <link rel="stylesheet" href="css/demo.css">
+</head>
+
+<body>
+
+  <header class="demo-bar">
+    <a class="demo-bar__title" href="index.html"><img src="public/logoblack.svg" alt="Nest Lab"><span>Componentes de
+        renovação</span></a>
+    <nav>
+      <a href="popup.html"><span>01</span>Popup</a>
+      <a href="toast.html"><span>02</span>Aviso</a>
+      <a href="checkout.html" aria-current="page"><span>03</span>Checkout</a>
+      <a href="popup-atraso.html"><span>04</span>Atraso</a>
+    </nav>
+  </header>
+
+  <!-- =====================================================================
+       COMPONENTE 03 — Checkout transparente
+       data-days-left: dias até o vencimento · data-server: identificação do servidor
+       Query string: ?plano=anual|mensal&metodo=card|pix  (Pix só no anual)
+       ===================================================================== -->
+  <div class="nl-co-header">
+    <div class="nl-co-header__inner">
+      <a class="nl-co-back" href="javascript:history.back()">
+        <svg class="nl-i" viewBox="0 0 24 24">
+          <path d="M19 12H5M11 18l-6-6 6-6" />
+        </svg>
+        Voltar
+      </a>
+      <img class="nl-co-header__logo" src="public/exav.svg" alt="Exavet">
+    </div>
+  </div>
+
+  <main class="nl-co" id="nlCheckoutRoot" data-days-left="3" data-server="Aplicação Web">
+
+    <div class="nl-co__intro" data-co-view="form">
+      <div class="nl-co__intro-text">
+        <h1>Renove seu servidor</h1>
+        <p>Três passos rápidos e tudo continua no ar, sem pausa.</p>
+      </div>
+      <div class="nl-co__due" aria-label="Validade do servidor">
+        <span class="nl-co__due-col">
+          <small>Ativo até</small>
+          <strong data-co-sum="current-until">—</strong>
+        </span>
+        <span class="nl-co__due-arrow" aria-hidden="true">
+          <svg class="nl-i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+        <span class="nl-co__due-col is-new">
+          <small>Com a renovação</small>
+          <strong data-co-sum="new-until">—</strong>
+        </span>
+      </div>
+    </div>
+
+    <div class="nl-co__grid" data-co-view="form">
+      <form class="nl-co__form" id="nlCheckout" novalidate>
+
+        <!-- 1. Plano -->
+        <section class="nl-co-card" data-co-section="plan">
+          <h2 class="nl-co-step"><span class="nl-co-step__num">1</span>Escolha o plano</h2>
+          <fieldset class="nl-plans">
+            <legend>Plano</legend>
+            <label class="nl-plan">
+              <input type="radio" name="plan" value="anual" checked>
+              <span class="nl-plan__radio" aria-hidden="true"></span>
+              <span class="nl-plan__info">
+                <span class="nl-plan__name">Anual <span class="nl-tag">-20%</span></span>
+                <span class="nl-plan__desc">Economize R$ 240/ano</span>
+              </span>
+              <span class="nl-plan__price">
+                <span class="nl-plan__old">R$ 99,90</span>
+                <span class="nl-plan__amount">R$ 79,90<small>/mês</small></span>
+              </span>
+            </label>
+            <label class="nl-plan">
+              <input type="radio" name="plan" value="mensal">
+              <span class="nl-plan__radio" aria-hidden="true"></span>
+              <span class="nl-plan__info">
+                <span class="nl-plan__name">Mensal</span>
+                <span class="nl-plan__desc">Cancele quando quiser</span>
+              </span>
+              <span class="nl-plan__price">
+                <span class="nl-plan__amount">R$ 99,90<small>/mês</small></span>
+              </span>
+            </label>
+          </fieldset>
+        </section>
+
+        <!-- 2. Dados -->
+        <section class="nl-co-card" data-co-section="data">
+          <h2 class="nl-co-step"><span class="nl-co-step__num">2</span>Seus dados</h2>
+          <div class="nl-grid">
+            <div class="nl-field">
+              <label for="coName">Nome completo</label>
+              <input class="nl-input" id="coName" name="name" autocomplete="name" placeholder="Como está no documento"
+                data-rule="name">
+              <span class="nl-field__error" role="alert"></span>
+            </div>
+            <div class="nl-field nl-field--half nl-field--stack">
+              <label for="coEmail">E-mail</label>
+              <input class="nl-input" id="coEmail" name="email" type="email" autocomplete="email"
+                placeholder="voce@empresa.com" data-rule="email">
+              <span class="nl-field__error" role="alert"></span>
+            </div>
+            <div class="nl-field nl-field--half nl-field--stack">
+              <label for="coDoc">CPF ou CNPJ</label>
+              <input class="nl-input" id="coDoc" name="doc" inputmode="numeric" placeholder="000.000.000-00"
+                data-rule="doc" data-mask="doc">
+              <span class="nl-field__error" role="alert"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Pagamento -->
+        <section class="nl-co-card" data-co-section="payment">
+          <h2 class="nl-co-step"><span class="nl-co-step__num">3</span>Pagamento</h2>
+
+          <div class="nl-tabs" role="tablist" aria-label="Forma de pagamento">
+            <button class="nl-tab" type="button" role="tab" id="tabCard" data-method="card" aria-controls="panelCard"
+              aria-selected="true">
+              <svg class="nl-i" viewBox="0 0 24 24">
+                <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
+                <path d="M2.5 10h19M6.5 15h4" />
+              </svg>Cartão
+            </button>
+            <button class="nl-tab" type="button" role="tab" id="tabPix" data-method="pix" aria-controls="panelPix"
+              aria-selected="false" tabindex="-1">
+              <svg class="nl-i" viewBox="0 0 24 24">
+                <path
+                  d="m12 2.8 3.4 3.4-3.4 3.4-3.4-3.4L12 2.8ZM12 14.4l3.4 3.4-3.4 3.4-3.4-3.4 3.4-3.4ZM2.8 12l3.4-3.4L9.6 12l-3.4 3.4L2.8 12ZM14.4 12l3.4-3.4 3.4 3.4-3.4 3.4-3.4-3.4Z" />
+              </svg>Pix
+            </button>
+          </div>
+
+          <div class="nl-tabpanel" role="tabpanel" id="panelCard" aria-labelledby="tabCard">
+            <div class="nl-grid">
+              <div class="nl-field">
+                <label for="coCardNumber">Número do cartão</label>
+                <div class="nl-input-wrap">
+                  <input class="nl-input" id="coCardNumber" name="cardNumber" inputmode="numeric"
+                    autocomplete="cc-number" placeholder="0000 0000 0000 0000" data-rule="cardNumber" data-mask="card"
+                    data-group="card">
+                  <span class="nl-card-brand" id="coCardBrand" aria-hidden="true"></span>
+                </div>
+                <span class="nl-field__error" role="alert"></span>
+              </div>
+              <div class="nl-field">
+                <label for="coCardName">Nome impresso no cartão</label>
+                <input class="nl-input" id="coCardName" name="cardName" autocomplete="cc-name"
+                  placeholder="Nome como no cartão" data-rule="cardName" data-group="card">
+                <span class="nl-field__error" role="alert"></span>
+              </div>
+              <div class="nl-field nl-field--half">
+                <label for="coCardExp">Validade</label>
+                <input class="nl-input" id="coCardExp" name="cardExp" inputmode="numeric" autocomplete="cc-exp"
+                  placeholder="MM/AA" data-rule="cardExp" data-mask="exp" data-group="card">
+                <span class="nl-field__error" role="alert"></span>
+              </div>
+              <div class="nl-field nl-field--half">
+                <label for="coCardCvv">CVV</label>
+                <input class="nl-input" id="coCardCvv" name="cardCvv" inputmode="numeric" autocomplete="cc-csc"
+                  placeholder="123" data-rule="cardCvv" data-mask="cvv" data-group="card">
+                <span class="nl-field__error" role="alert"></span>
+              </div>
+              <div class="nl-field" id="coInstallmentsField">
+                <label for="coInstallments">Parcelas</label>
+                <select class="nl-input" id="coInstallments" name="installments" data-nl-select></select>
+              </div>
+              <div class="nl-field" id="coRecurringNote" hidden>
+                <div class="nl-info">
+                  <strong>Cobrança automática todo mês</strong>
+                  <p>O valor é cobrado neste cartão a cada mês e seu servidor segue no ar. Sem fidelidade, cancele quando quiser.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nl-tabpanel" role="tabpanel" id="panelPix" aria-labelledby="tabPix" hidden>
+            <div class="nl-info">
+              <strong data-pix="title">Pague pelo app do seu banco</strong>
+              <p data-pix="text">Ao confirmar, você recebe um QR Code e o código Pix copia e cola. O pagamento é aprovado em segundos e seu servidor é renovado automaticamente.</p>
+            </div>
+          </div>
+        </section>
+      </form>
+
+      <!-- Resumo -->
+      <aside class="nl-co__summary" aria-label="Resumo do pedido">
+        <h2 class="nl-sum__title">Resumo</h2>
+
+        <div class="nl-sum__server">
+          <span class="nl-icon-box nl-icon-box--sm">
+            <svg class="nl-i" viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="7" rx="2" />
+              <rect x="3" y="13" width="18" height="7" rx="2" />
+              <path d="M7 7.5h.01M7 16.5h.01" />
+            </svg>
+          </span>
+          <span class="nl-sum__server-info">
+            <strong>Servidor Sistema Exavet</strong>
+            <span data-co-server>Aplicação Web</span>
+          </span>
+        </div>
+
+        <dl class="nl-sum__lines">
+          <div>
+            <dt data-co-sum="label">Plano anual · 12 meses</dt>
+            <dd data-co-sum="subtotal">R$ 1.198,80</dd>
+          </div>
+          <div class="is-discount" data-co-sum="discount-row">
+            <dt>Desconto de 20%</dt>
+            <dd data-co-sum="discount">− R$ 240,00</dd>
+          </div>
+          <div>
+            <dt data-co-sum="renew-label">Servidor ativo até</dt>
+            <dd data-co-sum="renew">—</dd>
+          </div>
+        </dl>
+
+        <div class="nl-sum__total">
+          <span class="nl-sum__total-label">Total a pagar hoje</span>
+          <strong data-co-sum="total">R$ 958,80</strong>
+          <span class="nl-sum__meta" data-co-sum="meta">ou até 12x de R$ 79,90 sem juros</span>
+        </div>
+
+        <button class="nl-btn nl-btn--primary nl-btn--lg nl-btn--block" type="submit" form="nlCheckout" id="coPay">
+          <span class="nl-spinner" aria-hidden="true"></span>
+          <span class="nl-btn__label">Pagar com Cartão</span>
+          <svg class="nl-i nl-i--arrow" viewBox="0 0 24 24">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </button>
+
+        <ul class="nl-trust">
+          <li><svg class="nl-i" viewBox="0 0 24 24">
+              <rect x="4" y="11" width="16" height="10" rx="2" />
+              <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+            </svg>Pagamento seguro</li>
+          <li><svg class="nl-i" viewBox="0 0 24 24">
+              <path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3Z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>Dados preservados</li>
+          <li><svg class="nl-i" viewBox="0 0 24 24">
+              <path d="M21 12a9 9 0 1 1-9-9" />
+              <path d="M21 3v6h-6" />
+            </svg>Sem interrupção</li>
+        </ul>
+
+        <footer class="nl-brand nl-brand--footer">
+          <img class="nl-brand__nest" src="public/logoblack.svg" alt="Nest Lab">
+          <span class="nl-brand__sep" aria-hidden="true"></span>
+          <span class="nl-brand__powered">powered by <img class="nl-brand__host" src="public/hostingerblack.svg"
+              alt="Hostinger"></span>
+        </footer>
+      </aside>
+    </div>
+
+    <!-- Estado de sucesso -->
+    <section class="nl-co-success" data-co-view="success" hidden aria-live="polite">
+      <div class="nl-co-success__icon" aria-hidden="true">
+        <svg class="nl-i" viewBox="0 0 24 24">
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      </div>
+
+      <div data-success="card" hidden>
+        <h1>Renovação confirmada</h1>
+        <p>Tudo certo, seu servidor continua no ar. O comprovante foi enviado para <strong data-s="email"></strong>.</p>
+      </div>
+
+      <div data-success="pix" hidden>
+        <h1>Falta só o Pix</h1>
+        <p data-s="pix-text">Escaneie o QR Code ou copie o código. Assim que o pagamento cair, a renovação é confirmada automaticamente.
+        </p>
+        <div class="nl-qr"><canvas width="232" height="232" data-s="qr" aria-label="QR Code Pix"></canvas></div>
+        <span class="nl-timer">
+          <svg class="nl-i" viewBox="0 0 24 24">
+            <circle cx="12" cy="13" r="8" />
+            <path d="M12 9v4l2 2M9 2h6" />
+          </svg>
+          Expira em <strong data-s="timer">30:00</strong>
+        </span>
+        <div class="nl-copy">
+          <code data-s="pix-code"></code>
+          <button class="nl-btn nl-btn--primary nl-btn--sm" type="button" data-copy="pix-code">Copiar</button>
+        </div>
+      </div>
+
+
+      <dl class="nl-co-success__details">
+        <div>
+          <dt>Plano</dt>
+          <dd data-s="plan"></dd>
+        </div>
+        <div>
+          <dt>Valor</dt>
+          <dd data-s="amount"></dd>
+        </div>
+        <div>
+          <dt>Pagamento</dt>
+          <dd data-s="method"></dd>
+        </div>
+        <div>
+          <dt>Servidor ativo até</dt>
+          <dd data-s="until"></dd>
+        </div>
+      </dl>
+
+      <div class="nl-co-success__actions">
+        <a class="nl-btn nl-btn--primary nl-btn--block" href="index.html">Voltar ao painel</a>
+        <button class="nl-btn nl-btn--text nl-btn--block" type="button" data-co-restart>Alterar forma de
+          pagamento</button>
+      </div>
+
+      <footer class="nl-brand nl-brand--footer">
+        <img class="nl-brand__nest" src="public/logoblack.svg" alt="Nest Lab">
+        <span class="nl-brand__sep" aria-hidden="true"></span>
+        <span class="nl-brand__powered">powered by <img class="nl-brand__host" src="public/hostingerblack.svg"
+            alt="Hostinger"></span>
+      </footer>
+    </section>
+  </main>
+  <!-- ===================== fim do COMPONENTE 03 ===================== -->
+
+  <script src="js/nl-core.js"></script>
+  <script src="js/nl-checkout.js"></script>
+</body>
+
+</html>

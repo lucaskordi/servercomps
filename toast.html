@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>02 · Aviso de renovação — Nest Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/nl-core.css">
+  <link rel="stylesheet" href="css/nl-toast.css">
+  <link rel="stylesheet" href="css/demo.css">
+</head>
+<body>
+
+  <header class="demo-bar">
+    <a class="demo-bar__title" href="index.html"><img src="public/logoblack.svg" alt="Nest Lab"><span>Componentes de renovação</span></a>
+    <nav>
+      <a href="popup.html"><span>01</span>Popup</a>
+      <a href="toast.html" aria-current="page"><span>02</span>Aviso</a>
+      <a href="checkout.html"><span>03</span>Checkout</a>
+      <a href="popup-atraso.html"><span>04</span>Atraso</a>
+    </nav>
+  </header>
+
+  <main class="demo-stage">
+    <span class="demo-stage__eyebrow">Componente 02</span>
+    <h1>Aviso de canto</h1>
+    <p>Lembrete discreto com 30 dias de antecedência. Não bloqueia a tela e pode ser fechado no X.</p>
+    <button class="nl-btn nl-btn--outline" type="button" data-nl-show-toast>Mostrar aviso</button>
+  </main>
+
+  <!-- =====================================================================
+       COMPONENTE 02 — copie daqui até o fim do bloco
+       (adicione data-snooze-hours="24" para não reaparecer por 24h após fechar)
+       ===================================================================== -->
+  <aside class="nl-toast" id="nlRenewToast" data-auto-show role="region" aria-label="Aviso de renovação do servidor">
+    <button class="nl-icon-btn nl-toast__close" type="button" data-nl-dismiss aria-label="Fechar aviso">
+      <svg class="nl-i" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+
+    <div class="nl-toast__head">
+      <div class="nl-icon-box nl-icon-box--sm" aria-hidden="true">
+        <svg class="nl-i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/></svg>
+      </div>
+      <div>
+        <p class="nl-toast__eyebrow">Seu servidor</p>
+        <h3 class="nl-toast__title">Hora de renovar</h3>
+      </div>
+    </div>
+
+    <p class="nl-toast__text">Seu servidor vence em <strong>30 dias</strong>. Renove para manter seus sites e sistemas no ar, sem interrupção.</p>
+
+    <div class="nl-info-row nl-toast__due">
+      <svg class="nl-i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+      <span>Vence em <strong data-nl-due="30">30 dias</strong></span>
+      <span class="nl-tag nl-info-row__end">Anual -20%</span>
+    </div>
+
+    <div class="nl-toast__actions">
+      <a class="nl-btn nl-btn--primary nl-btn--sm" href="checkout.html?plano=anual">
+        <span class="nl-btn__label">Renovar agora</span>
+        <svg class="nl-i nl-i--arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="nl-btn nl-btn--text nl-btn--sm" href="checkout.html?plano=mensal">Ver planos</a>
+    </div>
+
+    <footer class="nl-brand nl-brand--footer">
+      <img class="nl-brand__nest" src="public/logoblack.svg" alt="Nest Lab">
+      <span class="nl-brand__sep" aria-hidden="true"></span>
+      <span class="nl-brand__powered">powered by <img class="nl-brand__host" src="public/hostingerblack.svg" alt="Hostinger"></span>
+    </footer>
+  </aside>
+  <!-- ===================== fim do COMPONENTE 02 ===================== -->
+
+  <script src="js/nl-core.js"></script>
+  <script src="js/nl-toast.js"></script>
+</body>
+</html>

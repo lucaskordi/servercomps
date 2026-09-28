@@ -1,0 +1,318 @@
+/* ==========================================================================
+   Nest Lab — Core (tokens + primitivos compartilhados)
+   Todas as classes usam o prefixo .nl- para não colidir no projeto final.
+   ========================================================================== */
+
+:root {
+  --nl-primary: #673de6;
+  --nl-primary-600: #5b31d6;
+  --nl-primary-700: #4c25bd;
+  --nl-primary-50: #f4f0fe;
+  --nl-primary-100: #e8e0fc;
+  --nl-primary-rgb: 103, 61, 230;
+
+  --nl-bg: #ffffff;
+  --nl-surface: #f6f6f9;
+  --nl-surface-2: #eeeef3;
+  --nl-border: #e8e8ef;
+  --nl-border-strong: #d4d3de;
+
+  --nl-text: #17151f;
+  --nl-text-2: #5d5a6d;
+  --nl-text-3: #8e8b9d;
+
+  --nl-danger: #e5484d;
+  --nl-danger-600: #c42b30;
+  --nl-danger-50: #fff1f1;
+  --nl-success: #1f9d63;
+
+  --nl-radius-sm: 10px;
+  --nl-radius: 14px;
+  --nl-radius-lg: 22px;
+
+  --nl-shadow-sm: 0 1px 2px rgba(23, 21, 31, .05), 0 2px 8px -2px rgba(23, 21, 31, .06);
+  --nl-shadow-lg: 0 30px 80px -24px rgba(23, 21, 31, .32), 0 0 0 1px rgba(23, 21, 31, .04);
+  --nl-ring: 0 0 0 4px rgba(var(--nl-primary-rgb), .16);
+
+  --nl-font: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --nl-ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+[class^="nl-"], [class*=" nl-"] { font-family: var(--nl-font); box-sizing: border-box; }
+[class^="nl-"] *, [class*=" nl-"] * { box-sizing: border-box; }
+[class^="nl-"][hidden], [class*=" nl-"][hidden], [class*="nl-"] [hidden] { display: none !important; }
+
+/* Ícones (stroke, estilo linear) */
+svg.nl-i {
+  width: 20px; height: 20px; flex: none;
+  fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* --------------------------------------------------------------------------
+   Botões
+   -------------------------------------------------------------------------- */
+.nl-btn {
+  --h: 48px;
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: var(--h); padding: 0 20px;
+  border: 0; border-radius: 12px;
+  font: inherit; font-size: 15px; font-weight: 600; letter-spacing: -.005em;
+  text-decoration: none; white-space: nowrap; cursor: pointer;
+  transition: background-color .2s, color .2s, box-shadow .25s, transform .25s var(--nl-ease);
+  -webkit-tap-highlight-color: transparent;
+}
+.nl-btn svg.nl-i { width: 18px; height: 18px; transition: transform .3s var(--nl-ease); }
+.nl-btn:focus-visible { outline: none; box-shadow: var(--nl-ring); }
+.nl-btn:active { transform: scale(.98); }
+
+.nl-btn--primary {
+  background: var(--nl-primary); color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), 0 8px 20px -8px rgba(var(--nl-primary-rgb), .65);
+}
+.nl-btn--primary:hover {
+  background: var(--nl-primary-600);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), 0 14px 28px -10px rgba(var(--nl-primary-rgb), .75);
+}
+.nl-btn--primary:hover svg.nl-i--arrow { transform: translateX(3px); }
+.nl-btn--primary:active { transform: translateY(0) scale(.98); }
+.nl-btn--primary:focus-visible { box-shadow: var(--nl-ring), 0 8px 20px -8px rgba(var(--nl-primary-rgb), .65); }
+
+.nl-btn--secondary { background: var(--nl-surface); color: var(--nl-text); }
+.nl-btn--secondary:hover { background: var(--nl-surface-2); }
+
+.nl-btn--outline { background: #fff; color: var(--nl-text); box-shadow: inset 0 0 0 1.5px var(--nl-border); }
+.nl-btn--outline:hover { box-shadow: inset 0 0 0 1.5px var(--nl-border-strong); background: var(--nl-surface); }
+
+.nl-btn--text { background: transparent; color: var(--nl-text-2); --h: 42px; }
+.nl-btn--text:hover { color: var(--nl-text); background: var(--nl-surface); }
+
+.nl-btn--sm { --h: 38px; padding: 0 14px; font-size: 14px; border-radius: 10px; }
+.nl-btn--lg { --h: 54px; font-size: 16px; border-radius: 14px; }
+.nl-btn--block { width: 100%; }
+
+.nl-btn[disabled], .nl-btn.is-loading { pointer-events: none; }
+.nl-btn.is-loading { opacity: .9; }
+.nl-btn .nl-spinner { display: none; }
+.nl-btn.is-loading .nl-spinner { display: block; }
+.nl-btn.is-loading .nl-btn__label { opacity: .85; }
+
+.nl-spinner {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, .35); border-top-color: #fff;
+  animation: nl-spin .7s linear infinite;
+}
+
+/* Botão de ícone (fechar etc.) */
+.nl-icon-btn {
+  width: 36px; height: 36px; display: grid; place-items: center;
+  border: 0; border-radius: 10px; background: transparent; color: var(--nl-text-3);
+  cursor: pointer; transition: background-color .2s, color .2s, transform .2s var(--nl-ease);
+}
+.nl-icon-btn svg.nl-i { width: 18px; height: 18px; transition: transform .3s var(--nl-ease); }
+.nl-icon-btn:hover { background: var(--nl-surface); color: var(--nl-text); }
+.nl-icon-btn:hover svg.nl-i { transform: rotate(90deg); }
+.nl-icon-btn:active { transform: scale(.92); }
+.nl-icon-btn:focus-visible { outline: none; box-shadow: var(--nl-ring); }
+
+/* --------------------------------------------------------------------------
+   Chips / tags
+   -------------------------------------------------------------------------- */
+.nl-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 30px; padding: 0 12px; border-radius: 999px;
+  background: var(--nl-surface); color: var(--nl-text-2);
+  font-size: 13px; font-weight: 500; white-space: nowrap;
+}
+.nl-chip strong { color: var(--nl-text); font-weight: 600; }
+.nl-chip__dot { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--nl-primary); flex: none; }
+.nl-chip__dot::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; background: inherit;
+  animation: nl-ping 1.8s var(--nl-ease) infinite;
+}
+.nl-chip--alert .nl-chip__dot { background: var(--nl-danger); }
+.nl-chip--primary { background: var(--nl-primary-50); color: var(--nl-primary-700); }
+
+.nl-tag {
+  display: inline-flex; align-items: center; height: 20px; padding: 0 7px;
+  border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .01em;
+  background: var(--nl-primary); color: #fff;
+}
+.nl-tag--soft { background: var(--nl-primary-100); color: var(--nl-primary-700); }
+
+/* --------------------------------------------------------------------------
+   Seletor de plano (radio cards) — usado no popup e no checkout
+   -------------------------------------------------------------------------- */
+.nl-plans { display: grid; gap: 10px; border: 0; padding: 0; margin: 0; min-width: 0; }
+.nl-plans legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+.nl-plan {
+  position: relative; display: flex; align-items: center; gap: 14px;
+  padding: 15px 16px; border-radius: var(--nl-radius);
+  background: #fff; box-shadow: inset 0 0 0 1.5px var(--nl-border);
+  cursor: pointer; user-select: none;
+  transition: box-shadow .2s, background-color .2s, transform .25s var(--nl-ease);
+}
+.nl-plan:hover { box-shadow: inset 0 0 0 1.5px var(--nl-border-strong); background: var(--nl-surface); }
+.nl-plan:active { transform: scale(.99); }
+.nl-plan input { position: absolute; opacity: 0; pointer-events: none; }
+
+.nl-plan__radio {
+  width: 20px; height: 20px; flex: none; border-radius: 50%;
+  display: grid; place-items: center;
+  box-shadow: inset 0 0 0 1.5px var(--nl-border-strong); background: #fff;
+  transition: box-shadow .2s;
+}
+.nl-plan__radio::after {
+  content: ""; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--nl-primary); transform: scale(0);
+  transition: transform .25s var(--nl-ease);
+}
+.nl-plan:has(input:checked) {
+  background: var(--nl-primary-50);
+  box-shadow: inset 0 0 0 1.5px var(--nl-primary), 0 6px 18px -10px rgba(var(--nl-primary-rgb), .45);
+}
+.nl-plan:has(input:checked) .nl-plan__radio { box-shadow: inset 0 0 0 1.5px var(--nl-primary); }
+.nl-plan:has(input:checked) .nl-plan__radio::after { transform: scale(1); }
+.nl-plan:has(input:focus-visible) { outline: 2px solid var(--nl-primary); outline-offset: 3px; }
+
+.nl-plan__info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.nl-plan__name { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--nl-text); }
+.nl-plan__desc { font-size: 13px; line-height: 1.4; color: var(--nl-text-2); text-wrap: pretty; }
+.nl-plan__price { display: flex; align-items: baseline; justify-content: flex-end; gap: 8px; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.nl-plan__old { font-size: 13px; color: var(--nl-text-3); text-decoration: line-through; }
+.nl-plan__amount { font-size: 17px; font-weight: 700; letter-spacing: -.02em; color: var(--nl-text); }
+.nl-plan__amount small { font-size: 12px; font-weight: 500; color: var(--nl-text-3); letter-spacing: 0; margin-left: 1px; }
+
+/* Espaço estreito: nome + preço na 1ª linha, descrição ocupa a 2ª linha inteira */
+.nl-plans { container: nl-plans / inline-size; }
+@container nl-plans (max-width: 330px) {
+  .nl-plan { display: grid; grid-template-columns: 20px 1fr auto; column-gap: 12px; row-gap: 3px; align-items: center; }
+  .nl-plan__radio { grid-row: 1 / span 2; }
+  .nl-plan__info, .nl-plan__price { display: contents; }
+  .nl-plan__name { grid-column: 2; grid-row: 1; }
+  .nl-plan__amount { grid-column: 3; grid-row: 1; }
+  .nl-plan__desc { grid-column: 2 / 4; grid-row: 2; }
+  .nl-plan__old { display: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Assinatura de marca (marca d'água)
+   -------------------------------------------------------------------------- */
+.nl-brand {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  font-size: 11px; font-weight: 500; letter-spacing: .02em; color: var(--nl-text-3);
+}
+.nl-brand img { display: block; width: auto; opacity: .38; transition: opacity .25s; }
+.nl-brand:hover img { opacity: .6; }
+.nl-brand__nest { height: 11px; }
+.nl-brand__host { height: 13px; }
+.nl-brand__sep { width: 1px; height: 12px; background: var(--nl-border-strong); }
+.nl-brand__powered { display: inline-flex; align-items: center; gap: 6px; }
+.nl-brand--start { justify-content: flex-start; }
+
+/* --------------------------------------------------------------------------
+   Peças compartilhadas de comunicação (mesma mensagem = mesmo visual)
+   -------------------------------------------------------------------------- */
+
+/* Caixa de ícone (servidor, alerta…) */
+.nl-icon-box {
+  width: 48px; height: 48px; flex: none; display: grid; place-items: center;
+  border-radius: 14px; background: var(--nl-primary-50); color: var(--nl-primary);
+}
+.nl-icon-box svg.nl-i { width: 24px; height: 24px; }
+.nl-icon-box--sm { width: 40px; height: 40px; border-radius: 12px; }
+.nl-icon-box--sm svg.nl-i { width: 20px; height: 20px; }
+.nl-icon-box--alert { background: var(--nl-danger-50); color: var(--nl-danger); }
+
+/* Linha de informação (ex.: "Vence em 30 de setembro") */
+.nl-info-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; border-radius: 12px; background: var(--nl-surface);
+  font-size: 14px; color: var(--nl-text-2);
+}
+.nl-info-row > svg.nl-i { width: 18px; height: 18px; color: var(--nl-text-3); }
+.nl-info-row strong { color: var(--nl-text); font-weight: 600; white-space: nowrap; }
+.nl-info-row__end { margin-left: auto; }
+
+/* Status de atenção (ponto + texto) */
+.nl-status {
+  display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+  font-size: 13px; font-weight: 600; color: var(--nl-danger-600);
+}
+.nl-status .nl-chip__dot { background: var(--nl-danger); }
+
+/* Bloco explicativo (título + texto) */
+.nl-info { padding: 16px 18px; border-radius: 14px; background: var(--nl-surface); }
+.nl-info strong { display: block; font-size: 15px; font-weight: 600; color: var(--nl-text); }
+.nl-info p { margin: 4px 0 0; font-size: 14px; line-height: 1.55; color: var(--nl-text-2); text-wrap: pretty; }
+
+/* Rodapé de marca dentro dos componentes */
+.nl-brand--footer { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--nl-border); }
+
+/* --------------------------------------------------------------------------
+   Animações
+   -------------------------------------------------------------------------- */
+@keyframes nl-spin { to { transform: rotate(360deg); } }
+@keyframes nl-ping { 0% { transform: scale(1); opacity: .55; } 80%, 100% { transform: scale(2.8); opacity: 0; } }
+@keyframes nl-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes nl-shake { 10%, 90% { transform: translateX(-1px); } 20%, 80% { transform: translateX(2px); } 30%, 50%, 70% { transform: translateX(-3px); } 40%, 60% { transform: translateX(3px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  [class^="nl-"], [class*=" nl-"], [class^="nl-"]::after, [class*=" nl-"]::after {
+    animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Select customizado (.nl-select) — gerado a partir de <select data-nl-select>
+   -------------------------------------------------------------------------- */
+.nl-select { position: relative; }
+.nl-select__native { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+.nl-select__trigger {
+  display: flex; align-items: center; gap: 10px;
+  text-align: left; cursor: pointer; padding-right: 12px;
+}
+.nl-select__value { flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px; overflow: hidden; white-space: nowrap; }
+.nl-select__value small { font-size: 13px; font-weight: 500; color: var(--nl-text-3); }
+.nl-select__chev {
+  width: 28px; height: 28px; flex: none; display: grid; place-items: center;
+  border-radius: 8px; color: var(--nl-text-3);
+  transition: transform .3s var(--nl-ease), background-color .2s, color .2s;
+}
+.nl-select__chev svg.nl-i { width: 18px; height: 18px; }
+.nl-select__trigger:hover .nl-select__chev { background: var(--nl-surface); color: var(--nl-text-2); }
+.nl-select.is-open .nl-select__trigger { box-shadow: inset 0 0 0 1.5px var(--nl-primary), var(--nl-ring); }
+.nl-select.is-open .nl-select__chev { transform: rotate(180deg); color: var(--nl-primary); background: var(--nl-primary-50); }
+
+.nl-select__list {
+  position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 60;
+  margin: 0; padding: 6px; list-style: none;
+  max-height: 296px; overflow-y: auto; overscroll-behavior: contain;
+  background: #fff; border-radius: 16px;
+  box-shadow: 0 22px 48px -16px rgba(23, 21, 31, .28), 0 0 0 1px rgba(23, 21, 31, .06);
+  display: none; transform-origin: top center; /* fechado não ocupa espaço na página */
+}
+.nl-select.is-open .nl-select__list { display: block; animation: nl-select-in .22s var(--nl-ease); }
+.nl-select.is-up .nl-select__list { top: auto; bottom: calc(100% + 8px); transform-origin: bottom center; }
+.nl-select.is-up.is-open .nl-select__list { animation-name: nl-select-in-up; }
+@keyframes nl-select-in { from { opacity: 0; transform: translateY(-6px) scale(.98); } }
+@keyframes nl-select-in-up { from { opacity: 0; transform: translateY(6px) scale(.98); } }
+
+.nl-select__option {
+  display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px;
+  border-radius: 10px; cursor: pointer; font-size: 15px; color: var(--nl-text);
+  font-variant-numeric: tabular-nums; transition: background-color .15s, color .15s;
+}
+.nl-select__option small { font-size: 13px; font-weight: 500; color: var(--nl-text-3); }
+.nl-select__option > span:first-child { flex: 1; min-width: 0; }
+.nl-select__option-check { width: 18px; height: 18px; color: var(--nl-primary); opacity: 0; transform: scale(.6); transition: opacity .2s, transform .25s var(--nl-ease); }
+.nl-select__option.is-active { background: var(--nl-surface); }
+.nl-select__option[aria-selected="true"] { color: var(--nl-primary); font-weight: 600; }
+.nl-select__option[aria-selected="true"] small { color: var(--nl-primary); opacity: .7; }
+.nl-select__option[aria-selected="true"] .nl-select__option-check { opacity: 1; transform: none; }
+.nl-select__option[aria-selected="true"].is-active { background: var(--nl-primary-50); }
