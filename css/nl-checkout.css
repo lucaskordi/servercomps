@@ -118,20 +118,6 @@ select.nl-input {
 .nl-tab:focus-visible { outline: none; box-shadow: var(--nl-ring); }
 .nl-tabpanel { animation: nl-rise .35s var(--nl-ease); }
 
-/* Notas informativas */
-.nl-note {
-  display: flex; gap: 12px; padding: 14px 16px; border-radius: 14px;
-  background: var(--nl-surface); font-size: 14px; line-height: 1.5; color: var(--nl-text-2);
-}
-.nl-note + .nl-note { margin-top: 10px; }
-.nl-note svg.nl-i { color: var(--nl-primary); margin-top: 1px; }
-.nl-note strong { color: var(--nl-text); font-weight: 600; }
-.nl-note--primary { background: var(--nl-primary-50); }
-
-/* Painel Pix */
-.nl-pix { padding: 16px 18px; border-radius: 14px; background: var(--nl-surface); }
-.nl-pix strong { display: block; font-size: 15px; font-weight: 600; color: var(--nl-text); }
-.nl-pix p { margin: 4px 0 0; font-size: 14px; line-height: 1.55; color: var(--nl-text-2); text-wrap: pretty; }
 
 /* Resumo */
 .nl-co__summary {
@@ -141,10 +127,6 @@ select.nl-input {
 .nl-sum__server {
   display: flex; align-items: center; gap: 12px; padding: 14px;
   border-radius: 16px; background: #fff; box-shadow: var(--nl-shadow-sm);
-}
-.nl-sum__server-icon {
-  width: 40px; height: 40px; flex: none; display: grid; place-items: center;
-  border-radius: 12px; background: var(--nl-primary-50); color: var(--nl-primary);
 }
 .nl-sum__server-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .nl-sum__server-info strong { font-size: 14px; font-weight: 600; }
@@ -178,7 +160,6 @@ select.nl-input {
   background: #fff; color: var(--nl-primary); box-shadow: var(--nl-shadow-sm);
 }
 
-.nl-co__summary > .nl-brand { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--nl-border); }
 
 /* Sucesso */
 .nl-co-success {
@@ -222,7 +203,6 @@ select.nl-input {
 .nl-co-success__details dt { color: var(--nl-text-2); }
 .nl-co-success__details dd { margin: 0; font-weight: 600; text-align: right; }
 .nl-co-success__actions { display: flex; flex-direction: column; gap: 6px; margin-top: 20px; }
-.nl-co-success > .nl-brand { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--nl-border); }
 
 @keyframes nl-draw { to { stroke-dashoffset: 0; } }
 
